@@ -6,7 +6,9 @@ function App() {
   return (
     <div>
       <h1>AniList Free GraphQl Endpoint </h1>
-      <h3>https://graphql.anilist.co</h3>
+      <h3>
+        <a href="https://anilist.co/graphiql">how to use This GrapQL API </a>
+      </h3>
       <CharacterSearch />
     </div>
   );
