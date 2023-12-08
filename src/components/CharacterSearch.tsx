@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Chip, Input } from "@mui/material";
+import { Button } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { useCharacterSearch } from "../hooks/useCharacterSearch";
 
 function CharacterSearch() {
@@ -13,13 +16,15 @@ function CharacterSearch() {
 
   return (
     <div>
-      <input
+      <Input
         type="text"
         value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        placeholder="好きなキャラを検索しよう"
+        onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
+          setSearchText(e.target.value)
+        }
+        placeholder="Typing AnimeCharacter"
       />
-      <button onClick={handleSearch}>検索</button>
+      <Button onClick={handleSearch}>Search</Button>
 
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
@@ -27,7 +32,9 @@ function CharacterSearch() {
       {data && data.Character && (
         <div>
           <h2>Name: {data.Character.name.full}</h2>
-          <img src={data.Character.image.medium} alt="Character Image" />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img src={data.Character.image.medium} alt="Character Image" />
+          </div>
           <p>
             Date of Birth: {data.Character.dateOfBirth.year}-
             {data.Character.dateOfBirth.month}-{data.Character.dateOfBirth.day}
@@ -39,6 +46,16 @@ function CharacterSearch() {
           >
             More Info
           </a>
+          {/* <div style={{ marginTop: "5px" }}>
+            <Tooltip
+              title="The result of Search depends on Anilist API.
+              Due to partial matching rather than exact matching, 
+              there is a possibility of unexpected results. "
+              placement="right-start"
+            >
+              <Chip label="About Results" color="warning" variant="outlined" />
+            </Tooltip>
+          </div> */}
         </div>
       )}
     </div>
